@@ -1,2 +1,0 @@
-# ABC Simples BR RS
-
