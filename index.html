@@ -116,6 +116,41 @@
   .btn:hover{filter:brightness(1.05);}
   .btn.ghost{background:transparent; color:var(--ink); border:2px solid var(--ink);}
 
+  /* downloads */
+  .dl-intro{color:#e8f0ffcc; font-size:calc(16px * var(--fs, 1)); margin:0 0 24px; max-width:640px;}
+  .dl-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media (max-width:900px){ .dl-grid{grid-template-columns:1fr;} }
+  .dl-card{
+    background:var(--primary-card); border-radius:var(--radius); padding:26px 24px 24px;
+    border:1px solid rgba(255,255,255,0.18); display:flex; flex-direction:column; gap:14px;
+    box-shadow:0 10px 24px rgba(8,6,14,0.18); transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .dl-card:hover{transform:translateY(-4px); box-shadow:0 16px 30px rgba(8,6,14,0.26);}
+  .dl-icon{
+    width:56px; height:56px; border-radius:16px; display:flex; align-items:center; justify-content:center;
+    background:var(--amber); color:var(--amber-ink);
+  }
+  .dl-icon svg{width:30px; height:30px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round;}
+  .dl-card h3{font-size:calc(20px * var(--fs, 1)); margin:0; color:#fff;}
+  .dl-card p{color:#e8f0ffcc; font-size:calc(14px * var(--fs, 1)); margin:0;}
+  .dl-btns{display:flex; flex-direction:column; gap:10px; margin-top:auto; padding-top:6px;}
+  .dl-btns .btn{justify-content:space-between; width:100%; background:var(--amber); color:var(--amber-ink);}
+  .dl-btns .btn.alt{background:rgba(255,255,255,0.14); color:#fff; box-shadow:inset 0 0 0 2px rgba(255,255,255,0.35);}
+  .dl-btns .btn small{font-weight:700; opacity:.8; font-size:calc(12px * var(--fs, 1));}
+  .dl-btns .btn span{display:inline-flex; align-items:center; gap:8px;}
+  .dl-btns .btn svg{width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;}
+  .dl-tip{
+    margin-top:24px; padding:16px 20px; border-radius:var(--radius); background:rgba(255,255,255,0.12);
+    border:1px dashed rgba(255,255,255,0.4); color:#fff; font-size:calc(14px * var(--fs, 1));
+  }
+  .dl-tip b{color:var(--amber);}
+  .dl-tip ul{margin:8px 0 0; padding-left:20px; display:grid; gap:4px;}
+  html.a11y-hc .dl-card, html.a11y-hc .dl-tip{border:2px solid #fff !important; box-shadow:none;}
+  html.a11y-hc .dl-icon{border:2px solid #fff !important; color:#000 !important;}
+  html.a11y-hc .dl-icon svg{stroke:#000;}
+  html.a11y-hc .dl-btns .btn.alt{background-color:#000 !important; color:#ffeb3b !important;}
+  html.a11y-hc .dl-btns .btn.alt svg{stroke:#ffeb3b;}
+
   /* hero */
   .hero{position:relative; padding:96px 24px 150px; overflow:hidden;}
   .hero-inner{max-width:760px; margin:0 auto; text-align:center; position:relative; z-index:2;}
@@ -191,7 +226,7 @@
     width:128px; height:128px; border-radius:50%; margin:0 auto 12px;
     display:flex; align-items:center; justify-content:center;
     font-family:'Baloo 2'; font-weight:700; font-size:22px; color:#fff;
-    object-fit:cover;
+    object-fit:cover; object-position:50% 20%;
   }
   @media (min-width:641px){
     .creator-card:last-child:nth-child(odd){ grid-column:1 / -1; justify-self:center; width:calc(50% - 12px); }
@@ -763,12 +798,42 @@ body.fs-lock{ overflow:hidden; }
         <h2>Baixe o jogo</h2>
       </div>
     </div>
-    <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
-      <div>
-        <h3 style="font-size:calc(18px * var(--fs, 1)); margin-bottom:6px; color:#fff;">ABC Simples para Windows</h3>
-        <p style="color:#e8f0ffcc; font-size:calc(14px * var(--fs, 1)); margin:0; max-width:420px;">Baixe e jogue offline, sem precisar de internet — ideal para usar em sala de aula ou levar para casa. Inclui a versão do professor. Arquivo .exe, aproximadamente 45&nbsp;MB.</p>
+    <p class="dl-intro">Baixe e jogue offline, sem precisar de internet — ideal para usar em sala de aula ou levar para casa. Todas as versões incluem a versão do professor. Escolha o seu sistema:</p>
+    <div class="dl-grid">
+      <div class="dl-card">
+        <div class="dl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div>
+        <h3>Windows</h3>
+        <p>Para computadores e notebooks com Windows. Baixe o .zip, extraia e abra o ABC Simples.exe.</p>
+        <div class="dl-btns">
+          <a class="btn" href="downloads/ABC-Simples-Windows-64bits.zip" download><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>Versão 64 bits</span><small>20,1&nbsp;MB</small></a>
+          <a class="btn alt" href="downloads/ABC-Simples-Windows-32bits.zip" download><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>Versão 32 bits</span><small>16,3&nbsp;MB</small></a>
+        </div>
       </div>
-      <a class="btn" href="ABC Simples.exe" download style="background:var(--amber); color:var(--amber-ink); flex-shrink:0;">Baixar</a>
+      <div class="dl-card">
+        <div class="dl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 8 4 4-4 4"/><path d="M12 17h7"/><rect x="2.5" y="3.5" width="19" height="17" rx="3"/></svg></div>
+        <h3>Linux</h3>
+        <p>Para computadores com Linux. Baixe o .zip, extraia e dê permissão de execução ao arquivo do jogo.</p>
+        <div class="dl-btns">
+          <a class="btn" href="downloads/ABC-Simples-Linux-64bits.zip" download><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>Versão 64 bits</span><small>16,9&nbsp;MB</small></a>
+          <a class="btn alt" href="downloads/ABC-Simples-Linux-32bits.zip" download><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>Versão 32 bits</span><small>16,8&nbsp;MB</small></a>
+        </div>
+      </div>
+      <div class="dl-card">
+        <div class="dl-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg></div>
+        <h3>Android</h3>
+        <p>Para celulares e tablets Android. Baixe o .apk e toque nele para instalar.</p>
+        <div class="dl-btns">
+          <a class="btn" href="downloads/ABC-Simples-Android-64bits.apk" download><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>Versão 64 bits</span><small>41,3&nbsp;MB</small></a>
+          <a class="btn alt" href="downloads/ABC-Simples-Android-32bits.apk" download><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M5 21h14"/></svg>Versão 32 bits</span><small>41,5&nbsp;MB</small></a>
+        </div>
+      </div>
+    </div>
+    <div class="dl-tip">
+      <b>Não sabe qual versão escolher?</b> A de 64 bits serve para quase todos os computadores e celulares atuais. Use a de 32 bits só se a outra não abrir.
+      <ul>
+        <li><b>Windows e Linux:</b> mantenha os dois arquivos extraídos (o jogo e o .pck) na mesma pasta.</li>
+        <li><b>Android:</b> se o celular pedir, permita a instalação de apps de fontes desconhecidas.</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -803,27 +868,27 @@ body.fs-lock{ overflow:hidden; }
     </div>
     <div class="creators">
       <div class="creator-card">
-        <img class="avatar" src="davi.png.png" alt="Foto de criador">
+        <img class="avatar" src="davi.png" alt="Foto de criador">
         <h3>Davi</h3>
-        <p>Estudante do 9º ano, responsável pela progrmação em HTML, CSS e JavaScript do ABC Simples.</p>
+        <p>Estudante do 9º ano, responsável pela programação em HTML, CSS e JavaScript do ABC Simples.</p>
       </div>
       <div class="creator-card">
-        <img class="avatar" src="murilo.png.png" alt="Foto de criador">
+        <img class="avatar" src="murilo.png" alt="Foto de criador">
         <h3>Murilo Lima</h3>
         <p>Estudante do 9º ano, responsável pela programação geral do ABC Simples.</p>
       </div>
       <div class="creator-card">
-        <img class="avatar" src="keroly.png.png" alt="Foto de criadora">
+        <img class="avatar" src="keroly.png" alt="Foto de criadora">
         <h3>Keroly Leites Roque</h3>
         <p>Responsável pela parte de alfabetização, pelo caderno de campo e pela parte pedagógica do ABC Simples.</p>
       </div>
       <div class="creator-card">
-        <img class="avatar" src="walter.png.png" alt="Foto de criador">
+        <img class="avatar" src="walter.png" alt="Foto de criador">
         <h3>Walter Virtuoso</h3>
         <p>Professor orientador do projeto, responsável pela orientação e supervisão do desenvolvimento do ABC Simples.</p>
       </div>
       <div class="creator-card">
-        <img class="avatar" src="Lilian.png.png" alt="Foto de criador">
+        <img class="avatar" src="lilian.png" alt="Foto de criador">
         <h3>Lilian Virtuoso</h3>
         <p>Professora coorientadora do projeto, responsável pela orientação e supervisão do desenvolvimento do ABC Simples.</p>
       </div>
