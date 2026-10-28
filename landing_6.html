@@ -159,7 +159,7 @@
     color:var(--teal-ink); background:rgba(10, 196, 221, 0.15);
     padding:6px 14px; border-radius:999px; margin-bottom:20px;
   }
-  .hero h1{font-size:clamp(34px,6vw,56px); line-height:1.1;}
+  .hero h1,.hero h2{font-size:clamp(34px,6vw,56px); line-height:1.1;}
   .hero p.lead{font-size:calc(19px * var(--fs, 1)); color:var(--ink-soft); max-width:560px; margin:20px auto 32px;}
   .hero-ctas{display:flex; gap:14px; justify-content:center; flex-wrap:wrap;}
 
@@ -618,6 +618,83 @@ body.fs-lock{ overflow:hidden; }
   html.a11y-hc .voice-banner .voice-mic{ background-color:#ffeb3b !important; color:#000 !important; }
   html.a11y-hc .voice-banner b, html.a11y-hc .voice-heard{ color:#ffeb3b !important; }
   @media (max-width:600px){ .voice-banner{ top:calc(70px + env(safe-area-inset-top, 0px)); padding:10px 12px; } .voice-text{ font-size:13px; } }
+
+  /* ===== palco do jogo (topo) ===== */
+  .stage{position:relative; padding:34px 24px 64px; overflow:hidden;
+    background:radial-gradient(900px 420px at 50% -8%, rgba(255,255,255,.3), transparent 65%);}
+  .stage-head{position:relative; z-index:2; text-align:center; max-width:640px; margin:0 auto 24px;}
+  .stage-head .eyebrow{margin-bottom:12px;}
+  .stage-head h1{font-size:clamp(38px,7vw,64px); line-height:1.02; letter-spacing:-.01em;}
+  .stage-head p{margin:10px 0 0; font-size:calc(19px * var(--fs,1)); color:var(--ink-soft);}
+  .letter-block.float:not(.spinning){animation:bob 5s ease-in-out infinite;}
+  @keyframes bob{50%{translate:0 -12px;}}
+  .console{position:relative; z-index:2; max-width:1000px; margin:0 auto; padding:10px 10px 8px; border-radius:30px;
+    background:linear-gradient(150deg,#1d2a52,#0a1024 70%);
+    box-shadow:0 0 0 3px rgba(255,255,255,.22), 0 34px 60px -14px rgba(0,0,0,.55), 0 0 70px -8px rgba(255,184,77,.3);}
+  .console.playing{box-shadow:0 0 0 3px var(--amber), 0 34px 70px -14px rgba(0,0,0,.6), 0 0 90px 0 rgba(255,184,77,.5);
+    animation:glow 3.2s ease-in-out infinite;}
+  @keyframes glow{50%{box-shadow:0 0 0 3px var(--amber), 0 34px 70px -14px rgba(0,0,0,.6), 0 0 120px 10px rgba(255,184,77,.7);}}
+  .console-bar{display:flex; align-items:center; gap:12px; padding:4px 10px 10px; color:#fff; font-family:'Baloo 2',sans-serif; font-weight:700;}
+  .dots i{display:inline-block; width:11px; height:11px; border-radius:50%; margin-right:6px; background:#ff5f57;}
+  .dots i:nth-child(2){background:#febc2e;} .dots i:nth-child(3){background:#28c840; margin-right:0;}
+  .console-title{flex:1; text-align:center; font-size:calc(15px * var(--fs,1));}
+  .console-status{font-family:'Nunito Sans',sans-serif; font-size:12px; font-weight:800; padding:3px 12px; border-radius:999px; background:rgba(255,255,255,.16);}
+  .console.playing .console-status{background:#b9770e;} .console.playing.loaded .console-status{background:#1b8a4b;}
+  .console .play-frame-wrap{width:min(100%, calc((100dvh - 210px) * 1.515)); min-width:min(100%,320px); margin:0 auto; padding-top:0; aspect-ratio:3/2; border-radius:18px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);}
+  .console .play-frame-wrap:fullscreen{width:100% !important;}
+  .console .play-frame-wrap:-webkit-full-screen{width:100% !important;}
+  .console .play-frame-wrap.fake-fullscreen{width:100% !important; border-radius:0;}
+  @media (max-width:600px){ .stage{padding:20px 12px 44px;} .console{border-radius:22px; padding:6px 6px 4px;} .console .play-frame-wrap{aspect-ratio:4/3; border-radius:14px;} .dots{display:none;} }
+  .play-cover{background:radial-gradient(circle at 50% 35%, #1f5fc4 0%, #0a1535 75%); gap:14px;}
+  .play-cover img{width:84px; height:84px; border-radius:22px; box-shadow:0 10px 30px rgba(0,0,0,.4);}
+  .cover-title{font-family:'Baloo 2',sans-serif; font-size:calc(34px * var(--fs,1)); color:#fff; line-height:1;}
+  .play-cover-btn{background:var(--amber); color:var(--amber-ink); font-size:calc(22px * var(--fs,1)); padding:16px 40px; cursor:pointer;
+    box-shadow:0 0 0 0 rgba(255,184,77,.7); animation:pulseBtn 2.2s infinite;}
+  @keyframes pulseBtn{70%{box-shadow:0 0 0 16px rgba(255,184,77,0);} 100%{box-shadow:0 0 0 0 rgba(255,184,77,0);}}
+  .play-loading{position:absolute; inset:0; z-index:4; display:none; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+    background:#08122b; color:#fff; font-weight:800;}
+  .console.playing:not(.loaded) .play-loading{display:flex;}
+  .spinner{width:44px; height:44px; border-radius:50%; border:5px solid rgba(255,255,255,.25); border-top-color:var(--amber); animation:spin 1s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .console-tools{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; padding:12px 4px 6px;}
+  .tool-btn{font:inherit; font-weight:800; font-size:calc(14px * var(--fs,1)); min-height:44px; padding:8px 18px; border-radius:999px; cursor:pointer;
+    border:2px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); color:#fff;}
+  .tool-btn:hover{background:rgba(255,255,255,.22);}
+  .tool-btn[aria-pressed="true"]{background:var(--amber); border-color:var(--amber); color:var(--amber-ink);}
+  .stage .play-note{position:relative; z-index:2; color:#ffffffd9; margin-top:18px;}
+  .stage .play-note a{color:#fff;}
+  .focus-veil{position:fixed; inset:0; z-index:55; display:none; background:rgba(4,8,20,.86);}
+  body.focus-mode .focus-veil{display:block;}
+  body.focus-mode .console{z-index:60;}
+  .chips{list-style:none; display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:30px 0 0; padding:0;}
+  .chips li{background:rgba(8,6,14,.3); color:#fff; padding:8px 16px; border-radius:999px; font-weight:800; font-size:calc(14px * var(--fs,1));}
+  .dl-card,.creator-card,.contact-card{border-radius:24px;}
+  .section-head h2{font-size:calc(32px * var(--fs,1));}
+
+  /* ===== novos apoios de acessibilidade ===== */
+  html.a11y-calm{--cream:#e6edf4; --cream-2:#dde7f0; --ink:#1f2d3d; --ink-soft:#32465a; --header-bg:rgba(230,237,244,.96);
+    --primary-dark:#3d5a78; --primary-card:#4a6f90; --primary-creator:#cfdce9; --coral:#6d8fb0; --amber:#e8c98f; --amber-ink:#3d2800; --teal:#7fa8a2;}
+  html.a11y-calm .blocks, html.a11y-calm .chips{display:none;}
+  html.a11y-calm *, html.a11y-calm *::before, html.a11y-calm *::after{animation:none !important; transition:none !important;}
+  html.a11y-calm .btn, html.a11y-calm .brand .tile{color:#10202f;}
+  html.a11y-calm .letter-block, html.a11y-calm .letter-tag, html.a11y-calm .menu-letter{color:#10202f;}
+  html.a11y-calm .stage, html.a11y-calm .hero{background:none;}
+  html.a11y-calm .console{box-shadow:0 0 0 3px #b8c7d6;}
+  html.a11y-calm .eyebrow{background:rgba(61,90,120,.15);}
+  html.a11y-bigcur, html.a11y-bigcur *{cursor:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l16 9-7 2-3 7z' fill='black' stroke='white' stroke-width='1.6'/%3E%3C/svg%3E") 4 2, auto !important;}
+  html.a11y-links a:not(.btn):not(.contact-card):not(.a11y-skip){text-decoration:underline !important; text-decoration-thickness:3px; text-underline-offset:4px; font-weight:800;}
+  html.a11y-links .btn, html.a11y-links .contact-card, html.a11y-links .tool-btn{outline:3px solid #ffd400; outline-offset:2px;}
+  .ruler{position:fixed; left:0; right:0; top:40%; height:58px; z-index:250; pointer-events:none; display:none;
+    border-top:3px solid #ffd400; border-bottom:3px solid #ffd400; box-shadow:0 0 0 100vmax rgba(0,0,0,.55);}
+  html.a11y-ruler .ruler{display:block;}
+  .break-toast{position:fixed; left:50%; bottom:calc(24px + env(safe-area-inset-bottom,0px)); transform:translateX(-50%); z-index:360;
+    width:min(460px, calc(100vw - 24px)); background:#fff; color:#08060e; border:3px solid #1b8a4b; border-radius:20px; padding:16px 18px;
+    box-shadow:0 14px 40px rgba(0,0,0,.4); display:flex; flex-direction:column; gap:8px; align-items:flex-start;}
+  .break-toast[hidden]{display:none;}
+  .break-toast strong{font-family:'Baloo 2',sans-serif; font-size:20px;}
+  html.a11y-hc .console, html.a11y-hc .tool-btn, html.a11y-hc .break-toast{border:2px solid #fff !important;}
+  html.a11y-hc .tool-btn[aria-pressed="true"]{background-color:#ffeb3b !important; color:#000 !important;}
 </style>
 <script>
 (function(){
@@ -635,9 +712,13 @@ body.fs-lock{ overflow:hidden; }
   }catch(e){}
 })();
 </script>
+<script>
+try{var b=JSON.parse(localStorage.getItem('abc-simples-a11y2')||'{}'),c=document.documentElement.classList;
+if(b.calm)c.add('a11y-calm');if(b.cursor)c.add('a11y-bigcur');if(b.links)c.add('a11y-links');if(b.ruler)c.add('a11y-ruler');}catch(e){}
+</script>
 </head>
 <body>
-<a class="a11y-skip" href="#conteudo">Pular para o conteúdo</a>
+<a class="a11y-skip" href="#jogar">Pular para o conteúdo</a>
 <div class="a11y-sr" id="a11y-status" role="status" aria-live="polite"></div>
 
 
@@ -716,16 +797,61 @@ body.fs-lock{ overflow:hidden; }
   </div>
 </div>
 
-<section class="hero" id="conteudo" tabindex="-1">
+<section class="stage" id="jogar" tabindex="-1">
+  <div class="blocks" id="stage-blocks" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="stage-head">
+      <span class="eyebrow">jogo educativo · anos iniciais</span>
+      <h1>ABC Simples</h1>
+      <p>Toque em jogar e aprenda o alfabeto brincando.</p>
+    </div>
+    <div class="console" id="console">
+      <div class="console-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="console-title">ABC Simples</span>
+        <span class="console-status" id="console-status" role="status">pronto</span>
+      </div>
+      <div class="play-frame-wrap" id="play-frame-wrap">
+  <iframe id="game-iframe" data-src="ABC%20Simples.html" title="Jogo ABC Simples" allow="autoplay; fullscreen; gamepad; cross-origin-isolated" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
+  <div class="play-loading" aria-hidden="true"><span class="spinner"></span><span>Carregando o jogo…</span></div>
+  <div class="play-cover" id="play-cover">
+    <img src="favicon.png" alt="ABC Simples">
+    <strong class="cover-title">Vamos jogar?</strong>
+    <button class="play-cover-btn" id="play-cover-btn" type="button">▶ Jogar agora</button>
+    <p>Ao tocar, o jogo abre aqui mesmo, nesta tela. Você pode parar quando quiser.</p>
+  </div>
+  <button class="fullscreen-btn" id="fullscreen-btn" title="Tela cheia" aria-label="Tela cheia">
+    <svg id="fs-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
+      <path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
+      <path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
+      <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
+    </svg>
+  </button>
+</div>
+      <div class="console-tools">
+        <button class="tool-btn" id="tool-full" type="button">⛶ Tela cheia</button>
+        <button class="tool-btn" id="tool-focus" type="button" aria-pressed="false">◐ Modo foco</button>
+        <button class="tool-btn" id="tool-restart" type="button">↻ Reiniciar jogo</button>
+      </div>
+    </div>
+    <p class="play-note">Se o jogo não carregar, verifique se o navegador tem WebGL habilitado. Recomendado: Chrome ou Edge atualizados.<br><a id="game-newtab" href="ABC%20Simples.html" target="_blank" rel="noopener" style="color:#fff; text-decoration:underline;">Abrir o jogo em uma nova aba</a></p>
+  </div>
+  <div class="focus-veil" id="focus-veil"></div>
+</section>
+<section class="hero">
   <div class="blocks" id="floating-blocks"></div>
   <div class="hero-inner">
     <span class="eyebrow">jogo educativo · anos iniciais</span>
-    <h1>Aprender o alfabeto pode ser um jogo</h1>
+    <h2>Aprender o alfabeto pode ser um jogo</h2>
     <p class="lead">ABC Simples é um joguinho de alfabetização feito para crianças dos anos iniciais, criado por dois estudantes do 9º ano de uma escola pública. Direto no navegador, sem precisar instalar nada.</p>
     <div class="hero-ctas">
       <a class="btn" href="#jogar">Jogar agora</a>
       <a class="btn ghost" href="#sobre">Conhecer o projeto</a>
     </div>
+    <ul class="chips">
+      <li>Roda no navegador</li><li>Versão para baixar, offline</li><li>Feito por estudantes</li><li>Recursos de acessibilidade</li>
+    </ul>
   </div>
 </section>
 
@@ -746,35 +872,6 @@ body.fs-lock{ overflow:hidden; }
       <div class="card">
         <div class="visual-blocks" id="showcase-blocks"></div>
       </div>
-    </div>
-  </div>
-</section>
-<section class="page-section" id="jogar">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="letter-tag" style="background:var(--coral);">C</div>
-      <div>
-        <h2>Jogue agora, direto no navegador</h2>
-      </div>
-    </div>
-    <div class="play-card">
-      <div class="play-frame-wrap" id="play-frame-wrap">
-  <iframe id="game-iframe" data-src="ABC%20Simples.html" title="Jogo ABC Simples" allow="autoplay; fullscreen; gamepad; cross-origin-isolated" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
-  <div class="play-cover" id="play-cover">
-    <img src="favicon.png" alt="ABC Simples">
-    <button class="play-cover-btn" id="play-cover-btn" type="button">▶ Jogar agora</button>
-    <p>O jogo só carrega quando você clicar em jogar.</p>
-  </div>
-  <button class="fullscreen-btn" id="fullscreen-btn" title="Tela cheia" aria-label="Tela cheia">
-    <svg id="fs-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M8 3H5a2 2 0 0 0-2 2v3"></path>
-      <path d="M21 8V5a2 2 0 0 0-2-2h-3"></path>
-      <path d="M3 16v3a2 2 0 0 0 2 2h3"></path>
-      <path d="M16 21h3a2 2 0 0 0 2-2v-3"></path>
-    </svg>
-  </button>
-</div>
-      <p class="play-note">Se o jogo não carregar, verifique se o navegador tem WebGL habilitado. Recomendado: Chrome ou Edge atualizados.<br><a id="game-newtab" href="ABC%20Simples.html" target="_blank" rel="noopener" style="color:#fff; text-decoration:underline;">Abrir o jogo em uma nova aba</a></p>
     </div>
   </div>
 </section>
@@ -1840,6 +1937,104 @@ body.fs-lock{ overflow:hidden; }
   sw.addEventListener('click', function(){ enabled ? stop() : start(); });
   offBtn.addEventListener('click', function(){ stop(); sw.focus(); });
   window.addEventListener('pagehide', function(){ try { rec && rec.abort(); } catch(e) {} });
+})();
+</script>
+<script>
+(function(){
+  function $(i){ return document.getElementById(i); }
+  var h = document.documentElement;
+
+  // ---- palco do jogo ----
+  var cons=$('console'), st=$('console-status'), cov=$('play-cover'), ifr=$('game-iframe');
+  var cols=['var(--amber)','var(--teal)','var(--coral)'], box=$('stage-blocks');
+  ['A','B','C','1','2','+','D','E'].forEach(function(c,i){
+    var d=document.createElement('div'), rot=(i%2?8:-8);
+    d.className='letter-block float'; d.textContent=c;
+    d.style.top=(6+i*11)+'%'; d.style[i%2?'right':'left']=(2+(i%4)*2)+'%';
+    d.style.background=cols[i%3]; d.style.transform='rotate('+rot+'deg)';
+    d.style.setProperty('--base-rot',rot+'deg'); d.style.animationDelay=(i*0.4)+'s'; d.style.pointerEvents='auto';
+    box.appendChild(d);
+  });
+  function sync(){
+    var playing = cov.classList.contains('hidden');
+    cons.classList.toggle('playing', playing);
+    if(!playing){ cons.classList.remove('loaded'); st.textContent='pronto'; }
+    else if(!cons.classList.contains('loaded')) st.textContent='carregando…';
+  }
+  new MutationObserver(sync).observe(cov,{attributes:true,attributeFilter:['class']});
+  ifr.addEventListener('load',function(){ if(cov.classList.contains('hidden')){ cons.classList.add('loaded'); st.textContent='jogando'; } });
+  $('tool-full').addEventListener('click',function(){ $('fullscreen-btn').click(); });
+  $('tool-restart').addEventListener('click',function(){
+    var s=ifr.getAttribute('src');
+    if(!s){ $('play-cover-btn').click(); return; }
+    cons.classList.remove('loaded'); st.textContent='carregando…'; ifr.src=s;
+  });
+  var fb=$('tool-focus');
+  function focusMode(on){ document.body.classList.toggle('focus-mode',on); fb.setAttribute('aria-pressed',String(on)); }
+  fb.addEventListener('click',function(){ focusMode(!document.body.classList.contains('focus-mode')); });
+  $('focus-veil').addEventListener('click',function(){ focusMode(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && document.body.classList.contains('focus-mode')) focusMode(false); });
+
+  // ---- apoios extras de acessibilidade ----
+  var KEY='abc-simples-a11y2', D={calm:false,ruler:false,cursor:false,links:false,rate:1,brk:0};
+  var S=Object.assign({},D);
+  try{ Object.assign(S, JSON.parse(localStorage.getItem(KEY)||'{}')); }catch(e){}
+  var status=$('a11y-status');
+  function say(m){ if(!status) return; status.textContent=''; setTimeout(function(){ status.textContent=m; },30); }
+  function save(){ try{ localStorage.setItem(KEY,JSON.stringify(S)); }catch(e){} }
+  function sw(k,t,hint){ return '<div class="a11y-group"><button type="button" class="a11y-switch" role="switch" aria-checked="false" data-k="'+k+'"><span>'+t+'<span class="a11y-hint">'+hint+'</span></span><span class="a11y-state">Não</span></button></div>'; }
+  function seg(k,lbl,opts,cols){
+    return '<div class="a11y-group"><span class="a11y-label" id="lbl2-'+k+'">'+lbl+'</span><div class="a11y-seg" role="radiogroup" aria-labelledby="lbl2-'+k+'" style="grid-template-columns:repeat('+cols+',1fr)">'+
+      opts.map(function(o){ return '<button type="button" role="radio" aria-checked="false" data-s="'+k+'" data-v="'+o[0]+'">'+o[1]+'</button>'; }).join('')+'</div></div>';
+  }
+  var panel=$('a11y-panel'), rg=$('a11y-reset').parentNode;
+  rg.insertAdjacentHTML('beforebegin',
+    '<div class="a11y-group"><span class="a11y-label">Conforto e foco</span></div>'+
+    sw('calm','Modo calmo','Cores suaves, sem enfeites e sem movimento. Ajuda quem se cansa com muito estímulo.')+
+    sw('ruler','Régua de leitura','Uma faixa acompanha o mouse ou o dedo e escurece o resto da tela.')+
+    sw('cursor','Cursor grande','Deixa a setinha do mouse bem maior.')+
+    sw('links','Destacar links e botões','Sublinha links e coloca contorno nos botões.')+
+    seg('rate','Velocidade da voz (modo leitor)',[[0.7,'Lenta'],[1,'Normal'],[1.25,'Rápida']],3)+
+    seg('brk','Lembrete de pausa',[[0,'Não'],[10,'10 min'],[15,'15 min'],[25,'25 min']],4));
+
+  var ruler=document.createElement('div'); ruler.className='ruler'; ruler.setAttribute('aria-hidden','true'); document.body.appendChild(ruler);
+  function moveRuler(y){ ruler.style.top=Math.max(0,y-29)+'px'; }
+  window.addEventListener('pointermove',function(e){ if(S.ruler) moveRuler(e.clientY); },{passive:true});
+  window.addEventListener('touchmove',function(e){ if(S.ruler&&e.touches[0]) moveRuler(e.touches[0].clientY); },{passive:true});
+  document.addEventListener('focusin',function(e){ if(S.ruler&&e.target.getBoundingClientRect){ var r=e.target.getBoundingClientRect(); moveRuler(r.top+r.height/2); } });
+
+  var toast=document.createElement('div'); toast.className='break-toast'; toast.hidden=true; toast.setAttribute('role','status');
+  toast.innerHTML='<strong>Hora de uma pausa 💙</strong><span>Olhe para longe, respire fundo e tome uma água. Volte quando quiser.</span><button type="button" class="btn">Continuar</button>';
+  document.body.appendChild(toast);
+  toast.querySelector('button').addEventListener('click',function(){ toast.hidden=true; });
+  var timer=null;
+  function setBreak(){
+    clearInterval(timer); toast.hidden=true;
+    if(S.brk) timer=setInterval(function(){ if(!document.hidden) toast.hidden=false; }, S.brk*60000);
+  }
+
+  if('speechSynthesis' in window){
+    var orig=speechSynthesis.speak.bind(speechSynthesis);
+    speechSynthesis.speak=function(u){ try{ u.rate=Number(S.rate)||1; }catch(e){} orig(u); };
+  }
+
+  var NM={calm:'Modo calmo',ruler:'Régua de leitura',cursor:'Cursor grande',links:'Destaque de links'};
+  function apply(){
+    h.classList.toggle('a11y-calm',!!S.calm); h.classList.toggle('a11y-ruler',!!S.ruler);
+    h.classList.toggle('a11y-bigcur',!!S.cursor); h.classList.toggle('a11y-links',!!S.links);
+    panel.querySelectorAll('[data-k]').forEach(function(b){
+      var on=!!S[b.dataset.k]; b.setAttribute('aria-checked',String(on)); b.querySelector('.a11y-state').textContent=on?'Sim':'Não';
+    });
+    panel.querySelectorAll('[data-s]').forEach(function(b){ b.setAttribute('aria-checked',String(String(S[b.dataset.s])===b.dataset.v)); });
+  }
+  panel.addEventListener('click',function(e){
+    var b=e.target.closest('[data-k],[data-s]'); if(!b) return;
+    if(b.dataset.k){ S[b.dataset.k]=!S[b.dataset.k]; say(NM[b.dataset.k]+(S[b.dataset.k]?' ligado':' desligado')); }
+    else { S[b.dataset.s]=Number(b.dataset.v); if(b.dataset.s==='brk'){ setBreak(); say(S.brk?'Lembrete a cada '+S.brk+' minutos':'Lembrete desligado'); } else say('Voz '+b.textContent.trim()); }
+    save(); apply();
+  });
+  $('a11y-reset').addEventListener('click',function(){ S=Object.assign({},D); save(); apply(); setBreak(); });
+  apply(); setBreak();
 })();
 </script>
 </body>
